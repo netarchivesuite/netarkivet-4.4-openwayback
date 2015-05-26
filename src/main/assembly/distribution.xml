@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+    <id>dab-admin-staging-war</id>
+
+    <formats>
+        <format>war</format>
+    </formats>
+
+    <includeBaseDirectory>false</includeBaseDirectory >
+
+    <!-- groupId:artifactId:type[:classifier]:version -->
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>false</useProjectArtifact>
+            <includes>
+                <include>org.netpreserve.openwayback:openwayback-webapp:war</include>
+            </includes>
+            <unpack>true</unpack>
+            <unpackOptions>
+                <excludes>
+                  <exclude>advanced_search.jsp</exclude>
+                  <exclude>js/punify.js</exclude>
+                  <exclude>js/punycode.js</exclude>
+                  <exclude>WEB-INF/classes/logging.properties</exclude>
+                  <exclude>WEB-INF/classes/WaybackUI.properties</exclude>
+                  <exclude>WEB-INF/query/CalendarResults.jsp</exclude>
+                  <exclude>WEB-INF/replay/Timeline.jsp</exclude>
+                  <exclude>WEB-INF/replay/Toolbar.jsp</exclude>
+                  <exclude>WEB-INF/template/UI-header.jsp</exclude>
+                </excludes>
+            </unpackOptions>
+            <outputDirectory>/</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/src/main/webapp/</directory>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.basedir}/lib/</directory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+            <outputDirectory>/WEB-INF/lib/</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>
